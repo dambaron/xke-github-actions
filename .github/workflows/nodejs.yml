@@ -10,6 +10,9 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+      BRANCH: ${{ github.ref }}
+
     strategy:
       matrix:
         node-version: [8.x]
@@ -25,5 +28,6 @@ jobs:
         npm install
         npm test
         npm run build
+        docker build -t xebiafr/chili/${ BRANCH }/$GITHUB_SHA .
       env:
         CI: true
